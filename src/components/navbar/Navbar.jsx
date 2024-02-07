@@ -1,10 +1,33 @@
 import { Link, NavLink } from "react-router-dom";
 import { BsSunFill, BsFillMoonStarsFill } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
+import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 const Navbar = () => {
     const [open, setOpen] = useState(false);
+    const { logOut, user } = useContext(AuthContext);
+     const handleLogOut=()=>{
+      logOut()
+      .then(() => {
+        console.log("Logged Out Successfully!");
+      
+        Swal.fire({
+          title: "Logged out!",
+          text: `${
+            user?.displayName ? user.displayName : "User"
+          } logged out successfully!`,
+         
+          confirmButtonText: "Ok!",
+        });
+      })
+      .catch((error) => {
+        console.error(error.message);
+       
+      });
+     }
     const navItems = (
         <div className="lg:flex gap-6 font-semibold text-white">
           <NavLink
@@ -44,11 +67,21 @@ const Navbar = () => {
             <ul className="hidden lg:block menu menu-horizontal px-1">
               {navItems}
             </ul>
-    
            
-            
-            
-            <div className="dropdown dropdown-end">
+            <div>
+        {user
+          ?
+          <FiLogOut onClick={handleLogOut}  className="text-3xl text-red-500 cursor-pointer"/>
+          :
+          <Link to="/login">
+            <FiLogIn  className="text-3xl cursor-pointer text-red-500"/>
+          </Link>
+
+          }
+        </div>
+
+
+            <div className="dropdown dropdown-end ">
               <label className="swap swap-rotate lg:hidden">
                 <input type="checkbox" />
                 <GiHamburgerMenu
@@ -71,7 +104,7 @@ const Navbar = () => {
             </div>
             
           </div>
-          <div>Asi ra</div>
+         
         </div>
       );
     };
