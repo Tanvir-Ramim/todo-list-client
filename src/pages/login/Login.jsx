@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { BsGoogle, BsGithub } from 'react-icons/bs';
+import { BsGoogle } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
@@ -32,7 +32,10 @@ const Login = () => {
           
         
         </div>
-        <div><input className="border w-full  p-2 rounded-lg cursor-pointer" type="submit" value="Submit" /></div>
+        <div><input
+                    type="submit"
+                    className="btn w-full bg-red-500 border-none text-black"
+                  ></input></div>
          
         <p className="text-red-500 mx-auto">New here? <Link to="/register"><span className="font-bold">Create a new account</span></Link></p>
         <div className="flex flex-col items-center gap-3 mx-auto">
@@ -42,9 +45,7 @@ const Login = () => {
               
                     <BsGoogle/>
                 </div>
-                <div className="rounded-full p-2 border-2 border-red-500 hover:border-red-500 text-red-500 hover:text-red-500 duration-200">
-                    <BsGithub/>
-                </div>
+                
             </div>
         </div>
        
