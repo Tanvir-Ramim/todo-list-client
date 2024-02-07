@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { AuthContext } from "../Provider/AuthProvider"
 import { Link, Outlet } from "react-router-dom";
-import { FaHome, FaSignOutAlt } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 
 const DashBoardLayout = () => {
     const { user } = useContext(AuthContext)
