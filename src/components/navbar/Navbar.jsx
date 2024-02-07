@@ -1,5 +1,4 @@
 import { Link, NavLink } from "react-router-dom";
-import { BsSunFill, BsFillMoonStarsFill } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";

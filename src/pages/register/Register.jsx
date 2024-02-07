@@ -38,7 +38,13 @@ const Register = () => {
               })
             
            }
-
+           const handleGoogleLogIn=()=>{
+            googleSignIn()
+               .then(()=>{
+                 toast.success('Successfully Login')
+                 navigate(location?.state? location.state:'/')
+               })
+           }
           
 
 
@@ -111,9 +117,9 @@ const Register = () => {
                 <div className="flex flex-col items-center gap-3 mx-auto">
                   <p className="text-red-500 font-semibold">Or sign up with</p>
                   <div className="flex gap-6">
-                    <div  className="rounded-full p-2 border-2 border-red-500 hover:border-red-500 text-red-500 hover:text-red-500 duration-200">
+                    <div  onClick={handleGoogleLogIn} className="rounded-full p-2 border-2 border-red-500 hover:border-red-500 text-red-500 hover:text-red-500 duration-200">
         
-                      <BsGoogle />
+                      <BsGoogle  className="cursor-pointer"/>
                     </div>
                    
                   </div>
