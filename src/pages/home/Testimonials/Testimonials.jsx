@@ -26,12 +26,12 @@ const Testimonials = () => {
                     <div className="p-4 text-center border">
                         <RiBankCardFill className="inline-block w-10 h-10" />
                         <h3 className="text-xl font-semibold mb-2">Bankers</h3>
-                        <p className="text-gray-500 text-sm">Bankers often have multiple responsibilities and tasks to juggle, from client meetings to financial analysis. TaskForge help them prioritize tasks, set deadlines, and allocate time effectively.</p>
+                        <p className="text-gray-500 text-sm">Bankers often have multiple responsibilities and tasks to juggle, from client meetings to financial analysis. TaskManage help them prioritize tasks, set deadlines, and allocate time effectively.</p>
                     </div>
                     <div className="p-4 text-center border">
                         <GrUserManager className="inline-block w-10 h-10" />
                         <h3 className="text-xl font-semibold mb-2">Corporate Professionals</h3>
-                        <p className="text-gray-500 text-sm">Many corporate roles involve project-based work. TaskForge provide features for project planning, task assignment, progress tracking, and collaboration, facilitating effective project management.</p>
+                        <p className="text-gray-500 text-sm">Many corporate roles involve project-based work. TaskManage provide features for project planning, task assignment, progress tracking, and collaboration, facilitating effective project management.</p>
                     </div>
                 </div>
             </div>
