@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { IoMdAdd } from "react-icons/io";
 import toast, { Toaster } from "react-hot-toast";
 import useAxiosNormal from "../../../hooks/useAxios";
 import TaskShow from "../TaskShow/TaskShow";
 import useAllTask from "../../../hooks/useAllTask";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const TabManage = () => {
     const [itemNumber, setItemNumber] = useState(0);
     const [showModal, setShowModal] = useState(false);
    const axiosNormal =useAxiosNormal()
+   const {user}=useContext(AuthContext)
     const {allTask,isLoading,isPending,refetch}=useAllTask()
 
     const items = [
@@ -44,8 +46,9 @@ const TabManage = () => {
            const priority= e.target.priority.value ;
            const deadline= e.target.deadline.value ;
            const position = "pending"
+           const userMail=user?.email
            const taskInfo= {
-            taskName,description,priority,deadline,position
+            taskName,description,priority,deadline,position,userMail
            }
         
            axiosNormal.post('/allTask',taskInfo)

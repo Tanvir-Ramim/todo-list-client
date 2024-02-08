@@ -31,7 +31,7 @@ const Login = () => {
   googleSignIn()
      .then(()=>{
        toast.success('Successfully Login')
-       navigate(location?.state? location.state:'/')
+       navigate(from)
      })
  }
     return (
