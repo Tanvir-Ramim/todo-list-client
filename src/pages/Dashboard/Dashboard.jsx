@@ -1,17 +1,14 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext,   } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import TabManage from "./TabManager/TabManage";
-
-
-
-
-
+import useAllTask from "../../hooks/useAllTask";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext)
-  
+   const {allTask}=useAllTask()
 
-
+   const ongoing = allTask?.filter((item) => item.position == "ongoing");
+   const completed = allTask?.filter((item) => item.position == "completed");
 
   return (
     <div className=" lg:p-[30px] md:p-[20px] p-2 ">
@@ -23,19 +20,19 @@ const Dashboard = () => {
           <h4 className="border-2 h-[38px] pl-2 rounded-full py-[6px] md:py-[3px]">
             Total Task
             <span className="bg-[#562CFF]  ml-1   px-5 py-1 font-bold sm:text-xl text-white rounded-full ">
-              02
+              {allTask?.length}
             </span>{" "}
           </h4>
           <h4 className="border-2 h-[38px] pl-2 rounded-full py-[6px] md:py-[3px]">
             completed
             <span className="bg-[#FF7A00] ml-1  px-5 py-1 font-bold sm:text-xl  text-white rounded-full">
-              01
+            {completed?.length}
             </span>{" "}
           </h4>
           <h4 className="border-2 h-[38px]  pl-2 rounded-full py-[6px] md:py-[3px]">
             is ongoing{" "}
             <span className="bg-[#00B81D] ml-1  px-5 py-1 font-bold sm:text-xl  text-white rounded-full">
-              01
+             {ongoing?.length}
             </span>{" "}
           </h4>
         </div>

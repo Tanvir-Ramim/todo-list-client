@@ -36,7 +36,7 @@ const TabManage = () => {
           id: 3,
         },
         {
-          item: "Filter By Priotity",
+          item: "Filter By Priority",
           id: 4,
         },
       ];
@@ -63,18 +63,18 @@ const TabManage = () => {
            axiosNormal.post('/allTask',taskInfo)
            .then(res=>{
                setShowModal(false)
-             
+                console.log(res)
                toast.success('Successfully Add Your Task')
                refetch()
            })
            .catch((err)=>{
               setShowModal(false)
-            
+              console.log(err)
            })
       }
     
     return (
-      <div className="">
+      <div >
                <div className="mt-10 ">
         <Tabs>
           <TabList className="border-b-0 flex sm:justify-between justify-center gap-3 flex-wrap">
@@ -94,7 +94,7 @@ const TabManage = () => {
                 </Tab>
               ))}
             </div>
-            <div className="flex sm:justify-center justify-end  sm:items-center items-start ">
+            <div className="flex lg:w-1/5   lg:absolute  lg:right-0 sm:justify-center justify-end  sm:items-center items-start ">
               <button onClick={() => { setShowModal(true) }} className="btn">
                 Add Task <IoMdAdd className="text-black"></IoMdAdd>{" "}
               </button>
