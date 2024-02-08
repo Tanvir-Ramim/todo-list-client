@@ -4,11 +4,14 @@ import { FaArrowRight } from "react-icons/fa6";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from 'sweetalert2';
 import useAxiosNormal from '../../../hooks/useAxios';
-import useAllTask from '../../../hooks/useAllTask';
-
 
 import TaskEdit from '../../TaskEdit/TaskEdit';
 import toast, { Toaster } from 'react-hot-toast';
+import useAllTask from '../../../hooks/useAllTask';
+
+
+
+
 const TaskCard = ({task}) => {
   const [showModal,setShowModal] = useState(false)
   const showTheMOdal = ()=>{
@@ -52,17 +55,13 @@ const TaskCard = ({task}) => {
 }
 
 const onUpdate = (status,id)=>{
-  console.log(status,id)
   axiosNormal.put(`/updateTask/${status}/${id}`)
   .then(res => {
    refetch()
-
    toast('Updated the status ',{
        duration: 3000,
      })
-
        setShowModal(false)
-  
   })
   
 
@@ -83,6 +82,7 @@ const onUpdate = (status,id)=>{
         >
           {task?.position}
         </div>
+        
         <div
           className={`px-3 py-2 text-white w-fit rounded-full text-[12px] ${
             task?.priority == "top" ? "bg-red-600 " : ""
@@ -153,7 +153,7 @@ const TaskDetailsModal = ({ taskDetails, onClose, onUpdate }) => {
              {
                position === 'pending' && <button
                onClick={()=>{onUpdate('ongoing',taskDetails?._id)}}
-               className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 focus:outline-none"
+               className="bg-green-500 text-white px-4 py-2 rounded-md focus:outline-none"
              >
                Ongoing
              </button>
@@ -163,7 +163,7 @@ const TaskDetailsModal = ({ taskDetails, onClose, onUpdate }) => {
               {
                  position === 'pending' || position === 'ongoing' ? <button
                  onClick={()=>{onUpdate('completed',taskDetails?._id)}}
-                 className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none"
+                 className="bg-[#FF7A00] text-white px-4 py-2 rounded-md focus:outline-none"
                >
                  Completed
                </button>:''

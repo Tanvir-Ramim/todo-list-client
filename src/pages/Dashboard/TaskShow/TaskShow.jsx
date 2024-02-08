@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import TaskCard from '../TaskCard/TaskCard';
 
-const TaskShow = ({allTask}) => {
+const TaskShow = ({allTaskInfo}) => {
      
     return (
         <div className=''>
@@ -10,8 +10,8 @@ const TaskShow = ({allTask}) => {
             
             <div className='grid lg:grid-cols-2 xl:grid-cols-3 md:grid-cols-2 grid-cols-1   mt-6 gap-4'>
                {
-                allTask?.map(task=> <TaskCard key={task._id} task={task}></TaskCard>)
-               }
+                allTaskInfo?.map(task=> <TaskCard key={task._id} task={task}></TaskCard>)
+               } 
             </div>
            
            
@@ -21,6 +21,6 @@ const TaskShow = ({allTask}) => {
     );
 };
 TaskShow.propTypes={
-          allTask : PropTypes.array
+    allTaskInfo : PropTypes.array
 }
 export default TaskShow;

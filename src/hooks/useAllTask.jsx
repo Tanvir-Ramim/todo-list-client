@@ -6,10 +6,14 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 
 const useAllTask = () => {
+    
     const axiosNormal=useAxiosNormal()
+     
+    
+    
      const {user}=useContext(AuthContext)
     const allTaskFn=async()=>{
-          const res=await axiosNormal.get(`/allTask?email=${user?.email}`)
+          const res=await axiosNormal.get(`/allTask?email=${user?.email}`, )
           return res
     }
 
@@ -26,7 +30,7 @@ const useAllTask = () => {
     }
     
     const allTask=data?.data
-    return {allTask, isLoading,isPending,refetch}
+    return {allTask, isLoading,isPending,refetch,}
 };
 
-export default useAllTask;
+export default useAllTask ;

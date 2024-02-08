@@ -4,8 +4,12 @@ import { IoMdAdd } from "react-icons/io";
 import toast, { Toaster } from "react-hot-toast";
 import useAxiosNormal from "../../../hooks/useAxios";
 import TaskShow from "../TaskShow/TaskShow";
-import useAllTask from "../../../hooks/useAllTask";
+
 import { AuthContext } from "../../../Provider/AuthProvider";
+import useAllTask from "../../../hooks/useAllTask";
+import Filter from "./Filter/Filter";
+
+
 
 const TabManage = () => {
     const [itemNumber, setItemNumber] = useState(0);
@@ -31,11 +35,16 @@ const TabManage = () => {
           item: "Pending",
           id: 3,
         },
+        {
+          item: "Filter By Priotity",
+          id: 4,
+        },
       ];
       if(isLoading || isPending)
       {
         return <h1>Loading............</h1>
       }
+        
       const pending = allTask?.filter((item) => item.position == "pending");
       const ongoing = allTask?.filter((item) => item.position == "ongoing");
       const completed = allTask?.filter((item) => item.position == "completed");
@@ -65,7 +74,7 @@ const TabManage = () => {
       }
     
     return (
-        <div className="">
+      <div className="">
                <div className="mt-10 ">
         <Tabs>
           <TabList className="border-b-0 flex sm:justify-between justify-center gap-3 flex-wrap">
@@ -92,24 +101,23 @@ const TabManage = () => {
             </div>
           </TabList>
           <TabPanel>
-           
-           <TaskShow allTask={allTask}></TaskShow>
-
+           <TaskShow allTaskInfo={allTask}></TaskShow>
           </TabPanel>
           <TabPanel>
-
-          <TaskShow allTask={ongoing}></TaskShow>
+          <TaskShow allTaskInfo={ongoing}></TaskShow>
           </TabPanel>
           <TabPanel>
-          <TaskShow allTask={completed}></TaskShow>
+          <TaskShow allTaskInfo={completed}></TaskShow>
           </TabPanel>
           <TabPanel>
-          <TaskShow allTask={pending}></TaskShow>
+          <TaskShow allTaskInfo={pending}></TaskShow>
           </TabPanel>
+          <TabPanel>
+             <Filter></Filter>
+          </TabPanel>
+          
         </Tabs>
       </div>
-
-
       {showModal ? <div className="fixed  inset-0 z-50 flex items-center text-black justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
         <div className="relative lg:w-[500px] md:w-[450px] max-w-3xl mx-auto my-6">
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full  outline-none focus:outline-none">
