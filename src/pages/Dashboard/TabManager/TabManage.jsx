@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { IoMdAdd } from "react-icons/io";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
+import useAxiosNormal from "../../../hooks/useAxios";
 
 const TabManage = () => {
     const [itemNumber, setItemNumber] = useState(0);
     const [showModal, setShowModal] = useState(false);
-
+   const axiosNormal =useAxiosNormal()
     const items = [
         {
           item: "All Tasks",
@@ -25,6 +26,29 @@ const TabManage = () => {
           id: 3,
         },
       ];
+
+      const handleSubmit=(e)=>{
+           e.preventDefault()
+           const taskName= e.target.taskName.value ;
+           const description= e.target.description.value ;
+           const priority= e.target.priority.value ;
+           const deadline= e.target.deadline.value ;
+           const position = "pending"
+           const taskInfo= {
+            taskName,description,priority,deadline,position
+           }
+           console.log(taskInfo)
+           axiosNormal.post('/allTask',taskInfo)
+           .then(res=>{
+               setShowModal(false)
+               console.log(res)
+               toast.success('Successfully Add Your Task')
+           })
+           .catch((err)=>{
+              setShowModal(false)
+              console.log(err)
+           })
+      }
     
     return (
         <div>
@@ -77,7 +101,7 @@ const TabManage = () => {
       {showModal ? <div className="fixed  inset-0 z-50 flex items-center text-black justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
         <div className="relative w-[500px] max-w-3xl mx-auto my-6">
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full  outline-none focus:outline-none">
-            <form >
+            <form  onSubmit={handleSubmit}>
               <div className="p-6 rounded bg-gray-200 px-10">
                 <h3 className="text-lg font-semibold mb-4 text-black">
                   Add Task
@@ -88,6 +112,7 @@ const TabManage = () => {
                   </label>
                   <input
                     id="taskName"
+                    name="taskName"
                     type="text"
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                    
@@ -99,6 +124,7 @@ const TabManage = () => {
                   </label>
                   <textarea
                     id="description"
+                    name="description"
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                     cols="30" rows="8"
                   ></textarea>
@@ -110,6 +136,7 @@ const TabManage = () => {
                   </label>
                   <select
                     id="priority"
+                    name="priority"
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                   
                   >
@@ -124,6 +151,7 @@ const TabManage = () => {
                   </label>
                   <input
                     id="deadline"
+                    name="deadline"
                     type="datetime-local"
                     className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
                   />
