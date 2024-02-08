@@ -8,6 +8,7 @@ import useAllTask from '../../../hooks/useAllTask';
 
 
 import TaskEdit from '../../TaskEdit/TaskEdit';
+import toast, { Toaster } from 'react-hot-toast';
 const TaskCard = ({task}) => {
   const [showModal,setShowModal] = useState(false)
   const showTheMOdal = ()=>{
@@ -45,7 +46,26 @@ const TaskCard = ({task}) => {
         }
       });
 
+
+    
        
+}
+
+const onUpdate = (status,id)=>{
+  console.log(status,id)
+  axiosNormal.put(`/updateTask/${status}/${id}`)
+  .then(res => {
+   refetch()
+
+   toast('Updated the status ',{
+       duration: 3000,
+     })
+
+       setShowModal(false)
+  
+  })
+  
+
 }
   return (
     <div className='relative '>
@@ -93,15 +113,81 @@ const TaskCard = ({task}) => {
        <div> <button className="cursor-pointer flex" onClick={showTheMOdal}><FaArrowRight  className="mt-2"></FaArrowRight></button></div>
         
       </div>
-      {/* {
+      <div>
+      {
         showModal && <TaskDetailsModal taskDetails={task} onUpdate={onUpdate} onClose={showTheMOdal}></TaskDetailsModal>
-      } */}
+      }
+      </div>
       
     </div>
     </div>
   );
 };
+
 TaskCard.propTypes ={
    task: PropTypes.object
 }
 export default TaskCard;
+const TaskDetailsModal = ({ taskDetails, onClose, onUpdate }) => {
+  const { taskName, description, priority, deadline ,position } = taskDetails;
+
+  return (
+    <div className="fixed m-4 inset-0 z-50 flex items-center text-black justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
+      <div className="relative w-auto max-w-lg mx-auto my-6">
+        <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+          <div className="p-6">
+            <h3 className="text-lg font-semibold mb-4">{taskName}</h3>
+            <div className="mb-4">
+              <p className="font-semibold mb-2">Description:</p>
+              <p>{description}</p>
+            </div>
+            <div className="mb-4">
+              <p className="font-semibold mb-2">Priority:</p>
+              <p>{priority}</p>
+            </div>
+            <div className="mb-4">
+              <p className="font-semibold mb-2">Deadline:</p>
+              <p>{deadline}</p>
+            </div>
+            <div className="flex justify-start flex-wrap gap-4">
+             {
+               position === 'pending' && <button
+               onClick={()=>{onUpdate('ongoing',taskDetails?._id)}}
+               className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 focus:outline-none"
+             >
+               Ongoing
+             </button>
+             }
+              
+
+              {
+                 position === 'pending' || position === 'ongoing' ? <button
+                 onClick={()=>{onUpdate('completed',taskDetails?._id)}}
+                 className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none"
+               >
+                 Completed
+               </button>:''
+              }
+              
+              <button
+                onClick={()=>{onClose()}}
+                className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none"
+              >
+                Close
+              </button>
+              <Toaster></Toaster>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+TaskDetailsModal.propTypes ={
+  taskDetails: PropTypes.object,
+  onClose : PropTypes.func,
+  onUpdate : PropTypes.func
+}
+
+
