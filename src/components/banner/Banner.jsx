@@ -17,7 +17,7 @@ const Banner = () => {
               Start your daily tasks with
             </p>
             <h1 className="mb-5 text-4xl lg:text-7xl text-start ml-5 text-red-500 font-bold">TaskManage</h1>
-            <Link to="/dashboard/toDoList">
+            <Link to="/dashboard/dash">
             <button className="text-black grid items-center ml-5  rounded-md h-8 px-6 lg:h-12 bg-red-500 lg:mt-8 text-Black drop-shadow-lg border-none text-xl font-semibold ">Let’s Explore</button>
             </Link>
           </div>
