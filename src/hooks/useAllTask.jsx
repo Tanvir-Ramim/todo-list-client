@@ -9,7 +9,7 @@ const useAllTask = () => {
     const axiosNormal=useAxiosNormal()
      const {user}=useContext(AuthContext)
     const allTaskFn=async()=>{
-          const res=await axiosNormal.get('/alltask')
+          const res=await axiosNormal.get('/allTask')
           return res
     }
 

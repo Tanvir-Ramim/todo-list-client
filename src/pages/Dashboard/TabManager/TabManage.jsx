@@ -3,11 +3,15 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { IoMdAdd } from "react-icons/io";
 import toast, { Toaster } from "react-hot-toast";
 import useAxiosNormal from "../../../hooks/useAxios";
+import TaskShow from "../TaskShow/TaskShow";
+import useAllTask from "../../../hooks/useAllTask";
 
 const TabManage = () => {
     const [itemNumber, setItemNumber] = useState(0);
     const [showModal, setShowModal] = useState(false);
    const axiosNormal =useAxiosNormal()
+    const {allTask,isLoading,isPending,refetch}=useAllTask()
+
     const items = [
         {
           item: "All Tasks",
@@ -26,7 +30,13 @@ const TabManage = () => {
           id: 3,
         },
       ];
-
+      if(isLoading || isPending)
+      {
+        return <h1>Loading............</h1>
+      }
+      const pending = allTask?.filter((item) => item.position == "pending");
+      const ongoing = allTask?.filter((item) => item.position == "ongoing");
+      const completed = allTask?.filter((item) => item.position == "completed");
       const handleSubmit=(e)=>{
            e.preventDefault()
            const taskName= e.target.taskName.value ;
@@ -43,6 +53,7 @@ const TabManage = () => {
                setShowModal(false)
                console.log(res)
                toast.success('Successfully Add Your Task')
+               refetch()
            })
            .catch((err)=>{
               setShowModal(false)
@@ -78,21 +89,18 @@ const TabManage = () => {
             </div>
           </TabList>
           <TabPanel>
-            {/* <AllTask data={tasks} task={""}></AllTask> */}
-            hlw
+           
+           <TaskShow allTask={allTask}></TaskShow>
 
           </TabPanel>
           <TabPanel>
-            {/* <OneTask data={ongoing} task={"ongoing"}></OneTask> */}
-            hlw
+          <TaskShow allTask={ongoing}></TaskShow>
           </TabPanel>
           <TabPanel>
-            {/* <OneTask data={completed} task={"completed"}></OneTask> */}
-            h;lw
+          <TaskShow allTask={completed}></TaskShow>
           </TabPanel>
           <TabPanel>
-            {/* <OneTask data={pending} task={"pending"}></OneTask> */}
-            hlw
+          <TaskShow allTask={pending}></TaskShow>
           </TabPanel>
         </Tabs>
       </div>
