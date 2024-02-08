@@ -5,7 +5,9 @@ import { MdDeleteForever } from "react-icons/md";
 import Swal from 'sweetalert2';
 import useAxiosNormal from '../../../hooks/useAxios';
 import useAllTask from '../../../hooks/useAllTask';
-import { FaEdit } from "react-icons/fa";
+
+
+import TaskEdit from '../../TaskEdit/TaskEdit';
 const TaskCard = ({task}) => {
   const [showModal,setShowModal] = useState(false)
   const showTheMOdal = ()=>{
@@ -16,7 +18,7 @@ const TaskCard = ({task}) => {
   const {refetch}=useAllTask()
 
   const axiosNormal=useAxiosNormal()
-
+  
  
   const handleDelete=(id)=>{
     Swal.fire({
@@ -73,8 +75,8 @@ const TaskCard = ({task}) => {
         <div onClick={()=>handleDelete(task._id)} className='text-2xl cursor-pointer absolute right-0'>
         <MdDeleteForever />
         </div>
-        <div onClick={()=>handleDelete(task._id)} className='text-xl cursor-pointer absolute right-12'>
-        <FaEdit />
+        <div className='text-2xl cursor-pointer absolute right-0 top-2'>
+          <TaskEdit task={task}></TaskEdit>
         </div>
         
       </div>

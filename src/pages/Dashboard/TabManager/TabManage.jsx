@@ -47,17 +47,17 @@ const TabManage = () => {
            const taskInfo= {
             taskName,description,priority,deadline,position
            }
-           console.log(taskInfo)
+        
            axiosNormal.post('/allTask',taskInfo)
            .then(res=>{
                setShowModal(false)
-               console.log(res)
+             
                toast.success('Successfully Add Your Task')
                refetch()
            })
            .catch((err)=>{
               setShowModal(false)
-              console.log(err)
+            
            })
       }
     
@@ -108,7 +108,7 @@ const TabManage = () => {
 
 
       {showModal ? <div className="fixed  inset-0 z-50 flex items-center text-black justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
-        <div className="relative w-[500px] max-w-3xl mx-auto my-6">
+        <div className="relative lg:w-[500px] md:w-[450px] max-w-3xl mx-auto my-6">
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full  outline-none focus:outline-none">
             <form  onSubmit={handleSubmit}>
               <div className="p-6 rounded bg-gray-200 px-10">
