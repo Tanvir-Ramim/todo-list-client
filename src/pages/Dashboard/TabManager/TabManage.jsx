@@ -62,8 +62,8 @@ const TabManage = () => {
       }
     
     return (
-        <div>
-               <div className="mt-10">
+        <div className="">
+               <div className="mt-10 ">
         <Tabs>
           <TabList className="border-b-0 flex sm:justify-between justify-center gap-3 flex-wrap">
             <div className="flex gap-3 border-b-0  sm:justify-between justify-center  flex-wrap">
@@ -82,7 +82,7 @@ const TabManage = () => {
                 </Tab>
               ))}
             </div>
-            <div className="flex sm:justify-center justify-start sm:items-center items-start ">
+            <div className="flex sm:justify-center justify-end  sm:items-center items-start ">
               <button onClick={() => { setShowModal(true) }} className="btn">
                 Add Task <IoMdAdd className="text-black"></IoMdAdd>{" "}
               </button>
@@ -94,6 +94,7 @@ const TabManage = () => {
 
           </TabPanel>
           <TabPanel>
+
           <TaskShow allTask={ongoing}></TaskShow>
           </TabPanel>
           <TabPanel>

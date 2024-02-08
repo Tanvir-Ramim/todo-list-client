@@ -4,17 +4,17 @@ import TaskCard from '../TaskCard/TaskCard';
 const TaskShow = ({allTask}) => {
       console.log(allTask)
     return (
-        <div>
-            <div className='mt-10'>
+        <div className=''>
+            <div className='mt-10  '>
             
-            <div className='flex flex-col'>
-            <div className='flex  flex-wrap   mt-6 gap-4'>
+            
+            <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1   mt-6 gap-4'>
                {
                 allTask?.map(task=> <TaskCard key={task._id} task={task}></TaskCard>)
                }
             </div>
            
-            </div>
+           
            
         </div>
         </div>
