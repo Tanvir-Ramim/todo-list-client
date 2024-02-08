@@ -2,6 +2,7 @@ import { useContext,   } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import TabManage from "./TabManager/TabManage";
 import useAllTask from "../../hooks/useAllTask";
+import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext)
@@ -12,6 +13,10 @@ const Dashboard = () => {
 
   return (
     <div className=" lg:p-[30px] md:p-[20px] p-2 ">
+      <Helmet>
+        <title>Task | DashBoard</title>
+       
+      </Helmet>
       <h2 className="lg:text-[30px] ml-3 mt-3 font-medium md:text-[26px] items-center text-[24px] flex flex-wrap gap-4">
         Hello, {user?.displayName}
       </h2>
