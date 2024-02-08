@@ -46,7 +46,7 @@ const Navbar = () => {
                 ? "text-red-500 border-b-[3px] pb-1 border-[transparent] "
                 : "text-white border-b-[3px] pb-1 border-[transparent] hover:border-b-[3px] hover:border-red-500 duration-300"
             }
-            to="/dashboard"
+            to="/dashboard/dash"
           >
             <li>DASHBOARD</li>
           </NavLink>
