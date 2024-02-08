@@ -8,11 +8,13 @@ import Register from "../pages/register/Register";
 import DashBoardLayout from "../layout/DashBoardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
+import ErrorPage from "../components/errorPage/ErrorPage";
 
   const Routers = createBrowserRouter([
     {
       path: "/",
       element: <MainLayOut></MainLayOut>,
+      errorElement: <ErrorPage></ErrorPage>,
       children :[
         {
              index : true,

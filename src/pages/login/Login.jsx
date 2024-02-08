@@ -10,6 +10,7 @@ const Login = () => {
   const [error, setError] = useState(null)
   const navigate=useNavigate()
   const location=useLocation()
+  const from=location.state?.from?.pathname || '/'
   const handleLogIn=(e)=>{
     e.preventDefault()
     const form=e.target 
@@ -20,7 +21,7 @@ const Login = () => {
     signInUser(email,password)
     .then(()=>{
        toast.success('Successfully Login')
-         navigate(location?.state? location.state:'/')
+         navigate(from)
     })
     .catch(error=>{
         setError(error.message)

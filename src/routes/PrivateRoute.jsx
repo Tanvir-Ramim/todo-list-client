@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 
 const PrivateRoute = ({children}) => {
     const {user,loading} = useContext(AuthContext)
-    const lo = useLocation()
+    const location = useLocation()
     if(loading){
         return <div>Loading ..</div>
     }
     if(user && !loading){
         return children
    }
-    return <Navigate to="/login" state={{from: lo}} replace></Navigate>
+    return <Navigate state={{from:location}} replace to='/login'></Navigate>
 };
 
 PrivateRoute.propTypes ={
